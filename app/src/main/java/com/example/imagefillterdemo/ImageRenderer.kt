@@ -4,13 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import android.opengl.GLUtils
 import android.opengl.Matrix
 import com.example.imagefillterdemo.utils.BufferUtils
 import com.example.imagefillterdemo.utils.ShaderUtils
 import com.example.imagefillterdemo.utils.TextureUtils
 import java.nio.FloatBuffer
-
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -113,7 +111,7 @@ class ImageRenderer : GLSurfaceView.Renderer {
         GLES20.glUniform3fv(glChangeColor, 1, filter.data(), 0)
         GLES20.glUniformMatrix4fv(glMatrix, 1, false, mvpMatrix, 0)
 
-//        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glUniform1i(glTexture, 0)
         TextureUtils.genTexturesWithParameter(1, IntArray(1), 0, bitmap)
 
@@ -129,7 +127,8 @@ class ImageRenderer : GLSurfaceView.Renderer {
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
 
         // 释放
-//        GLES20.glDisableVertexAttribArray(glPosition)
-//        GLES20.glDisableVertexAttribArray(glCoordinate)
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
+        GLES20.glDisableVertexAttribArray(glPosition)
+        GLES20.glDisableVertexAttribArray(glCoordinate)
     }
 }

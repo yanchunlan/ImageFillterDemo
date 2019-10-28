@@ -28,4 +28,10 @@ class ImageGlSurfaceView : GLSurfaceView {
         setRenderer(renderer)
         renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY
     }
+
+
+    fun setFilter(imageFilter: ImageFilter = ImageFilter.NONE) {
+        renderer.filter = imageFilter
+        requestRender()
+    }
 }
